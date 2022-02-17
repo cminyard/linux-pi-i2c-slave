@@ -412,6 +412,12 @@
 		brcm,pull = <BCM2835_PUD_UP>;
 	};
 
+	i2csl0_pins: i2csl0 {
+		brcm,pins = <10 11>;
+		brcm,function = <BCM2835_FSEL_ALT3>;
+		brcm,pull = <BCM2835_PUD_UP>;
+	};
+
 	i2s_pins: i2s {
 		brcm,pins = <18 19 20 21>;
 		brcm,function = <BCM2835_FSEL_ALT0>;
@@ -475,6 +481,11 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c1_pins>;
 	clock-frequency = <100000>;
+};
+
+&i2csl0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2csl0_pins>;
 };
 
 &i2s {

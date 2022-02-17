@@ -490,6 +490,15 @@
 			status = "disabled";
 		};
 
+		i2csl0: i2c@7e214000 {
+			compatible = "brcm,bcm2835-i2c-slave";
+			reg = <0x7e214000 0x1000>;
+			interrupts = <2 11>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "disabled";
+		};
+
 		usb: usb@7e980000 {
 			compatible = "brcm,bcm2835-usb";
 			reg = <0x7e980000 0x10000>;

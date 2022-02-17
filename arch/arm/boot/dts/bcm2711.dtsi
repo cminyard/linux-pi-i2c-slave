@@ -1069,6 +1069,11 @@
 	interrupts = <GIC_SPI 117 IRQ_TYPE_LEVEL_HIGH>;
 };
 
+&i2csl0 {
+	compatible = "brcm,bcm2711-i2c-slave", "brcm,bcm2835-i2c-slave";
+	interrupts = <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
+};
+
 &mailbox {
 	interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>;
 };
