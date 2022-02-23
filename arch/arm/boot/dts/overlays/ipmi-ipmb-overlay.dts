@@ -1,0 +1,37 @@
+/dts-v1/;
+/plugin/;
+
+// Enable the ipmi_ipmb device on the target.
+//
+// Add i2c_addr=<0xnn> to set the I2C address of the device (which is
+// IPMI address >> 1.  Defaults to 0x42.
+//
+// Add bmc_addr=<0xnn> to set the BMC's IPMI address, defaults to 0x20.
+//
+// This uses i2c1 as the master device on the bus and i2csl0 as the
+// slave receiver.  You must wire these two devices together and then
+// wire that to the IPMB.
+
+/{
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&i2c1>;
+		__overlay__ {
+			ipmi_ipmb: ipmi-ipmb@0 {
+				compatible = "ipmi-ipmb";
+				device_type = "ipmi";
+				reg = <0x42>;
+				#address-cells = <1>;
+				#size-cells = <0>;
+				bmcaddr = /bits/ 8 <0x20>;
+				slave-dev = <&i2csl0>;
+			};
+		};
+	};
+
+	__overrides__ {
+		i2c_addr = <&ipmi_ipmb>,"reg:0";
+		bmc_addr = <&ipmi_ipmb>,"bmcaddr.0";
+	};
+};
