@@ -473,6 +473,28 @@ config I2C_BCM2835
 	  This support is also available as a module.  If so, the module
 	  will be called i2c-bcm2835.
 
+config I2C_BCM283X_SLAVE
+	tristate "Broadcom BCM283x I2C slave controller"
+	depends on ARCH_BCM2835 || ARCH_BRCMSTB || COMPILE_TEST
+	help
+	  If you say yes to this option, support will be included for the
+	  BCM2835 I2C slave-only controller.  This is called the "SPI/BSC
+	  SLAVE" in the documentation.
+
+	  This is a very limited slave device, it is unable to handle
+	  read requests from the controller and it had to receive at
+	  least two bytes of transmit from the controller for any data
+	  to be received.  You can't use this for an EEPROM or
+	  anything like that.  It's really only good for an IPMI IPMB
+	  slave receive side.  And you will have to use another I2C
+	  device to send data out on the IPMB bus, as this device
+	  cannot be a bus master.
+
+	  If you don't know what to do here, say N.
+
+	  This support is also available as a module.  If so, the module
+	  will be called i2c-bcm283x-slave.
+
 config I2C_BCM_IPROC
 	tristate "Broadcom iProc I2C controller"
 	depends on ARCH_BCM_IPROC || COMPILE_TEST
