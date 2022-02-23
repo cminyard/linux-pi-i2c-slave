@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/i2c/brcm,bcm2835-i2c-slave.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Broadcom BCM2835 I2C slave controller
+
+maintainers:
+  - Corey Minyard <minyard@acm.com>
+
+allOf:
+  - $ref: /schemas/i2c/i2c-controller.yaml#
+
+properties:
+  compatible:
+    oneOf:
+      - enum:
+          - brcm,bcm2835-i2c-slave
+      - items:
+          - const: brcm,bcm2711-i2c-slave
+          - const: brcm,bcm2835-i2c-slave
+
+  reg:
+    maxItems: 1
+
+  interrupts:
+    maxItems: 1
+
+required:
+  - compatible
+  - reg
+  - interrupts
+
+unevaluatedProperties: false
+
+examples:
+  - |
+    i2c@7e214000 {
+        compatible = "brcm,bcm2835-i2c-slave";
+        reg = <0x7e214000 0x1000>;
+        interrupts = <2 11>;
+    };
